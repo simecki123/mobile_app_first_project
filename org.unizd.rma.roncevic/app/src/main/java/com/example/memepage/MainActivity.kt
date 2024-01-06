@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun fetchGif(searchText: String) {
-        val apiKey = "fWEgBWUc4N9mEibSEjl7f51paXpsc0yr"
+        val apiKey = "API KEY"
         val baseUrl = "https://api.giphy.com/v1/gifs/search"
         val query = searchText.replace(" ", "+")
         val apiUrl = "$baseUrl?api_key=$apiKey&q=$query&limit=1"
