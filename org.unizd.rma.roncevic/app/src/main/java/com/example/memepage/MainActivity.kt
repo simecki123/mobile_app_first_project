@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.bumptech.glide.Glide
@@ -18,11 +19,13 @@ import java.net.URL
 
 class MainActivity : ComponentActivity() {
     private val gifUrls = mutableListOf<String>()
+    private val nameOfGIFs = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         createStarterGif()
+        hideTextView()
 
         val buttonHome: Button = findViewById(R.id.button1)
         val buttonCampfire: Button = findViewById(R.id.button2)
@@ -63,7 +66,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun fetchGif(searchText: String) {
-        val apiKey = "API KEY"
+        val apiKey = "YOUR API KEY"
         val baseUrl = "https://api.giphy.com/v1/gifs/search"
         val query = searchText.replace(" ", "+")
         val apiUrl = "$baseUrl?api_key=$apiKey&q=$query&limit=1"
@@ -93,11 +96,18 @@ class MainActivity : ComponentActivity() {
                             .getJSONObject("downsized")
                             .getString("url")
 
+                        val gifName = dataArray
+                            .getJSONObject(0)
+                            .getString("title")
+
                         gifUrls.add(0, gifUrl)
+                        nameOfGIFs.add(0, gifName)
                         // Keep only the last 5 URLs
                         if (gifUrls.size > 5) {
                             gifUrls.removeAt(gifUrls.lastIndex)
+                            nameOfGIFs.removeAt(nameOfGIFs.lastIndex)
                         }
+
                     } else {
                         runOnUiThread {
                             Toast.makeText(this@MainActivity, "That item doesn't exist in our database", Toast.LENGTH_SHORT).show()
@@ -105,6 +115,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     displayGifs()
+                    displayNames()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -125,6 +136,13 @@ class MainActivity : ComponentActivity() {
             imageView.visibility = View.VISIBLE
         }
     }
+    private fun displayNames() {
+        for (i in nameOfGIFs.indices) {
+            val textView = findViewById<TextView>(resources.getIdentifier("textView${i + 1}", "id", packageName))
+            textView.setText(nameOfGIFs[i])
+            textView.visibility = View.VISIBLE
+        }
+    }
 
 
     private fun createStarterGif() {
@@ -133,6 +151,14 @@ class MainActivity : ComponentActivity() {
             val imageView = findViewById<ImageView>(resources.getIdentifier("maingifImageView$i", "id", packageName))
             imageView.visibility = View.GONE
         }// Hide the default image initially
+    }
+
+    private fun hideTextView() {
+        // Hide all TextViews initially
+        for (i in 1..5) {
+            val textView = findViewById<TextView>(resources.getIdentifier("textView$i", "id", packageName))
+            textView.visibility = View.GONE
+        }
     }
 
 

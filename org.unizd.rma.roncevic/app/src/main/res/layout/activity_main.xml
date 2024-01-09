@@ -67,6 +67,12 @@
             android:orientation="vertical">
 
             <!-- ImageView 1 -->
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
             <ImageView
                 android:id="@+id/maingifImageView1"
                 android:layout_width="match_parent"
@@ -76,6 +82,12 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <!-- ImageView 2 -->
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
             <ImageView
                 android:id="@+id/maingifImageView2"
                 android:layout_width="match_parent"
@@ -85,6 +97,12 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <!-- ImageView 3 -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
             <ImageView
                 android:id="@+id/maingifImageView3"
                 android:layout_width="match_parent"
@@ -94,6 +112,12 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <!-- ImageView 4 -->
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
             <ImageView
                 android:id="@+id/maingifImageView4"
                 android:layout_width="match_parent"
@@ -103,6 +127,13 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <!-- ImageView 5 -->
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
             <ImageView
                 android:id="@+id/maingifImageView5"
                 android:layout_width="match_parent"
