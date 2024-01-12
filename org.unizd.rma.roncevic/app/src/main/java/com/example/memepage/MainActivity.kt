@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun fetchGif(searchText: String) {
-        val apiKey = "API KEY"
+        val apiKey = "fWEgBWUc4N9mEibSEjl7f51paXpsc0yr"
         val baseUrl = "https://api.giphy.com/v1/gifs/search"
         val query = searchText.replace(" ", "+")
         val apiUrl = "$baseUrl?api_key=$apiKey&q=$query&limit=1"
@@ -133,7 +133,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         // Add the user details to the gifsDetails list
-                        gifsDetails.add(userDetails.toStringArray())
+                        gifsDetails.add(0, userDetails.toStringArray())
 
                         gifUrls.add(0, gifUrl)
                         nameOfGIFs.add(0, gifName)
@@ -175,7 +175,7 @@ class MainActivity : ComponentActivity() {
     private fun displayNames() {
         for (i in nameOfGIFs.indices) {
             val textView = findViewById<TextView>(resources.getIdentifier("textView${i + 1}", "id", packageName))
-            textView.setText(nameOfGIFs[i])
+            textView.text = nameOfGIFs[i]
             textView.visibility = View.VISIBLE
         }
     }
@@ -232,16 +232,16 @@ class MainActivity : ComponentActivity() {
     // Extension function to convert UserDetails to String array
     fun UserDetails.toStringArray(): Array<String> {
         return arrayOf(
-            avatarUrl,
-            bannerImage,
-            bannerUrl,
-            profileUrl,
-            username,
-            displayName,
-            description,
-            instagramUrl,
-            websiteUrl,
-            isVerified.toString()
+            "AVATAR URL: $avatarUrl",
+            "BANNER IMAGE: $bannerImage",
+            "BANNER URL: $bannerUrl",
+            "PROFILE URL: $profileUrl",
+            "USERNAME: $username",
+            "DISPLAY NAME: $displayName",
+            "DESCRIPTION: $description",
+            "INSTAGRAM URL: $instagramUrl",
+            "WEBSITE URL: $websiteUrl",
+            "IS VERIFIED: $isVerified"
         )
     }
 
@@ -255,40 +255,46 @@ class MainActivity : ComponentActivity() {
 
         if (isImageViewNotEmpty(giph1)) {
             giph1.setOnClickListener {
-                val intent = Intent(this, GifDetailsActivity::class.java)
-                startActivity(intent)
+                val detailsArray = gifsDetails[0]
+                openGifDetailsActivity(detailsArray)
             }
         }
 
         if (isImageViewNotEmpty(giph2)) {
             giph2.setOnClickListener {
-                val intent = Intent(this, GifDetailsActivity::class.java)
-                startActivity(intent)
+                val detailsArray = gifsDetails[1]
+                openGifDetailsActivity(detailsArray)
             }
         }
 
         if (isImageViewNotEmpty(giph3)) {
             giph3.setOnClickListener{
-                val intent = Intent(this, GifDetailsActivity::class.java)
-                startActivity(intent)
+                val detailsArray = gifsDetails[2]
+                openGifDetailsActivity(detailsArray)
             }
         }
 
         if (isImageViewNotEmpty(giph4)) {
             giph4.setOnClickListener {
-                val intent = Intent(this, GifDetailsActivity::class.java)
-                startActivity(intent)
+                val detailsArray = gifsDetails[3]
+                openGifDetailsActivity(detailsArray)
             }
         }
 
         if (isImageViewNotEmpty(giph5)) {
             giph5.setOnClickListener {
-                val intent = Intent(this, GifDetailsActivity::class.java)
-                startActivity(intent)
+                val detailsArray = gifsDetails[4]
+                openGifDetailsActivity(detailsArray)
             }
         }
 
 
+    }
+
+    private fun openGifDetailsActivity(detailsArray: Array<String>) {
+        val intent = Intent(this@MainActivity, GifDetailsActivity::class.java)
+        intent.putExtra("detailsArray", detailsArray)
+        startActivity(intent)
     }
 
     // Function to check if ImageView has a non-default drawable

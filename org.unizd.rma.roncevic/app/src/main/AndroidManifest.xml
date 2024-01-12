@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".RestSoldierActivity"
-            android:label="Rest Soldier Activity"
+            android:label="Rest Soldier. You have seen too much gifs"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name=".GifDetailsActivity"
-            android:label="Rest Soldier Activity"
+            android:label="GifDetails"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
