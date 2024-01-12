@@ -20,6 +20,21 @@ import java.net.URL
 class MainActivity : ComponentActivity() {
     private val gifUrls = mutableListOf<String>()
     private val nameOfGIFs = mutableListOf<String>()
+    private val gifsDetails = mutableListOf<Array<String>>()
+
+    data class UserDetails(
+        val avatarUrl: String,
+        val bannerImage: String,
+        val bannerUrl: String,
+        val profileUrl: String,
+        val username: String,
+        val displayName: String,
+        val description: String,
+        val instagramUrl: String,
+        val websiteUrl: String,
+        val isVerified: Boolean
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +45,9 @@ class MainActivity : ComponentActivity() {
         val buttonHome: Button = findViewById(R.id.button1)
         val buttonCampfire: Button = findViewById(R.id.button2)
         val searchBar: EditText = findViewById(R.id.search_bar)
+
+
+        activateGifIconForDetails()
 
         buttonHome.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -66,7 +84,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun fetchGif(searchText: String) {
-        val apiKey = "YOUR API KEY"
+        val apiKey = "API KEY"
         val baseUrl = "https://api.giphy.com/v1/gifs/search"
         val query = searchText.replace(" ", "+")
         val apiUrl = "$baseUrl?api_key=$apiKey&q=$query&limit=1"
@@ -100,12 +118,30 @@ class MainActivity : ComponentActivity() {
                             .getJSONObject(0)
                             .getString("title")
 
+                        val userObject = dataArray.getJSONObject(0)
+                        val userObjectOrNull = if (userObject.has("user")) {
+                            userObject.getJSONObject("user")
+                        } else {
+                            null
+                        }
+
+                        val userDetails = if (userObject != null) {
+                            parseUserDetails(userObject)
+                        } else {
+                            // If "user" key doesn't exist, fill UserDetails with "DOESNT EXIST" values
+                            getDefaultUserDetails()
+                        }
+
+                        // Add the user details to the gifsDetails list
+                        gifsDetails.add(userDetails.toStringArray())
+
                         gifUrls.add(0, gifUrl)
                         nameOfGIFs.add(0, gifName)
                         // Keep only the last 5 URLs
                         if (gifUrls.size > 5) {
                             gifUrls.removeAt(gifUrls.lastIndex)
                             nameOfGIFs.removeAt(nameOfGIFs.lastIndex)
+                            gifsDetails.removeAt(gifsDetails.lastIndex)
                         }
 
                     } else {
@@ -144,6 +180,38 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun parseUserDetails(jsonObject: JSONObject): UserDetails {
+        val userObject = jsonObject.optJSONObject("user") ?: return getDefaultUserDetails()
+
+        return UserDetails(
+            avatarUrl = userObject.getString("avatar_url"),
+            bannerImage = userObject.getString("banner_image"),
+            bannerUrl = userObject.getString("banner_url"),
+            profileUrl = userObject.getString("profile_url"),
+            username = userObject.getString("username"),
+            displayName = userObject.getString("display_name"),
+            description = userObject.getString("description"),
+            instagramUrl = userObject.getString("instagram_url"),
+            websiteUrl = userObject.getString("website_url"),
+            isVerified = userObject.getBoolean("is_verified")
+        )
+    }
+
+    private fun getDefaultUserDetails(): UserDetails {
+        return UserDetails(
+            avatarUrl = "DOESNT EXIST",
+            bannerImage = "DOESNT EXIST",
+            bannerUrl = "DOESNT EXIST",
+            profileUrl = "DOESNT EXIST",
+            username = "DOESNT EXIST",
+            displayName = "DOESNT EXIST",
+            description = "DOESNT EXIST",
+            instagramUrl = "DOESNT EXIST",
+            websiteUrl = "DOESNT EXIST",
+            isVerified = false
+        )
+    }
+
 
     private fun createStarterGif() {
         // Hide all ImageViews initially
@@ -159,6 +227,73 @@ class MainActivity : ComponentActivity() {
             val textView = findViewById<TextView>(resources.getIdentifier("textView$i", "id", packageName))
             textView.visibility = View.GONE
         }
+    }
+
+    // Extension function to convert UserDetails to String array
+    fun UserDetails.toStringArray(): Array<String> {
+        return arrayOf(
+            avatarUrl,
+            bannerImage,
+            bannerUrl,
+            profileUrl,
+            username,
+            displayName,
+            description,
+            instagramUrl,
+            websiteUrl,
+            isVerified.toString()
+        )
+    }
+
+
+    fun activateGifIconForDetails() {
+        val giph1: ImageView = findViewById(R.id.maingifImageView1)
+        val giph2: ImageView = findViewById(R.id.maingifImageView2)
+        val giph3: ImageView = findViewById(R.id.maingifImageView3)
+        val giph4: ImageView = findViewById(R.id.maingifImageView4)
+        val giph5: ImageView = findViewById(R.id.maingifImageView5)
+
+        if (isImageViewNotEmpty(giph1)) {
+            giph1.setOnClickListener {
+                val intent = Intent(this, GifDetailsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        if (isImageViewNotEmpty(giph2)) {
+            giph2.setOnClickListener {
+                val intent = Intent(this, GifDetailsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        if (isImageViewNotEmpty(giph3)) {
+            giph3.setOnClickListener{
+                val intent = Intent(this, GifDetailsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        if (isImageViewNotEmpty(giph4)) {
+            giph4.setOnClickListener {
+                val intent = Intent(this, GifDetailsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        if (isImageViewNotEmpty(giph5)) {
+            giph5.setOnClickListener {
+                val intent = Intent(this, GifDetailsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+
+    }
+
+    // Function to check if ImageView has a non-default drawable
+    fun isImageViewNotEmpty(imageView: ImageView): Boolean {
+        return imageView.drawable != null && imageView.drawable.constantState != null
     }
 
 

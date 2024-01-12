@@ -33,6 +33,15 @@
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
+        <activity
+            android:name=".GifDetailsActivity"
+            android:label="Rest Soldier Activity"
+            android:theme="@style/Theme.AppCompat"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            android:launchMode="standard"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
     </application>
 
 </manifest>
