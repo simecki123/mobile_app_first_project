@@ -42,17 +42,14 @@ class MainActivity : ComponentActivity() {
         createStarterGif()
         hideTextView()
 
-        val buttonHome: Button = findViewById(R.id.button1)
+
         val buttonCampfire: Button = findViewById(R.id.button2)
         val searchBar: EditText = findViewById(R.id.search_bar)
 
 
         activateGifIconForDetails()
 
-        buttonHome.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+
 
         buttonCampfire.setOnClickListener {
             val intent = Intent(this, RestSoldierActivity::class.java)
