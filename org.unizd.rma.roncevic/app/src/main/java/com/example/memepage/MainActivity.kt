@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
     private val nameOfGIFs = mutableListOf<String>()
     private val gifsDetails = mutableListOf<Array<String>>()
 
+    // Data items
     data class UserDetails(
         val avatarUrl: String,
         val bannerImage: String,
@@ -35,7 +36,8 @@ class MainActivity : ComponentActivity() {
         val isVerified: Boolean
     )
 
-
+    // On create method.
+    // Activates buttons and searchbar.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,6 +72,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
+    // IF search bar isn't empty you can search for giph
     private fun onSearchIconClick() {
 
         val searchText = findViewById<EditText>(R.id.search_bar).text.toString()
@@ -80,6 +83,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
+    // Fetching api data
     private fun fetchGif(searchText: String) {
         val apiKey = "API KEY"
         val baseUrl = "https://api.giphy.com/v1/gifs/search"
@@ -159,7 +163,7 @@ class MainActivity : ComponentActivity() {
         thread.start()
     }
 
-
+    // Displaying gifs
     private fun displayGifs() {
         for (i in gifUrls.indices) {
             val imageView = findViewById<ImageView>(resources.getIdentifier("maingifImageView${i + 1}", "id", packageName))
@@ -169,6 +173,8 @@ class MainActivity : ComponentActivity() {
             imageView.visibility = View.VISIBLE
         }
     }
+
+    // Displaying names of the gifs
     private fun displayNames() {
         for (i in nameOfGIFs.indices) {
             val textView = findViewById<TextView>(resources.getIdentifier("textView${i + 1}", "id", packageName))
@@ -177,6 +183,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    // Getting details from api, but only if response contains those details. SOmetimes it doesn't.
     private fun parseUserDetails(jsonObject: JSONObject): UserDetails {
         val userObject = jsonObject.optJSONObject("user") ?: return getDefaultUserDetails()
 
@@ -194,6 +201,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+    // Default details if API doesn't give us details.
     private fun getDefaultUserDetails(): UserDetails {
         return UserDetails(
             avatarUrl = "DOESNT EXIST",
@@ -209,7 +217,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-
+    // Hiding default ImageView
     private fun createStarterGif() {
         // Hide all ImageViews initially
         for (i in 1..5) {
@@ -218,6 +226,7 @@ class MainActivity : ComponentActivity() {
         }// Hide the default image initially
     }
 
+    // Hiding default TextView
     private fun hideTextView() {
         // Hide all TextViews initially
         for (i in 1..5) {
@@ -242,7 +251,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
-
+    // Activating Icon to see details for each gif
     fun activateGifIconForDetails() {
         val giph1: ImageView = findViewById(R.id.maingifImageView1)
         val giph2: ImageView = findViewById(R.id.maingifImageView2)
@@ -288,6 +297,7 @@ class MainActivity : ComponentActivity() {
 
     }
 
+    // Method for activating new View.
     private fun openGifDetailsActivity(detailsArray: Array<String>) {
         val intent = Intent(this@MainActivity, GifDetailsActivity::class.java)
         intent.putExtra("detailsArray", detailsArray)

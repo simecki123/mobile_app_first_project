@@ -18,6 +18,7 @@ class GifDetailsActivity : AppCompatActivity() {
 
     }
 
+    // Initializing values from list of details.
     private fun initializeTextViews() {
         val textViewDetails1: TextView = findViewById(R.id.textViewDeatails1)
         val textViewDetails2: TextView = findViewById(R.id.textViewDeatails2)
