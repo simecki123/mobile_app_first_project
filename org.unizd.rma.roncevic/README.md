@@ -45,5 +45,5 @@ This mobile app is developed using Kotlin in Android Studio. It allows users to 
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone 
+   git clone https://github.com/simecki123/mobile_app_first_project.git
 
