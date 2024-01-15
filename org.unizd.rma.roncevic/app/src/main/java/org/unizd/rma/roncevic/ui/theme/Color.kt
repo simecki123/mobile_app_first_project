@@ -1,4 +1,4 @@
-package com.example.memepage.ui.theme
+package org.unizd.rma.roncevic.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

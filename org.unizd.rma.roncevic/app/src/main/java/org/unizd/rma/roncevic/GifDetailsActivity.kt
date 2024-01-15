@@ -1,8 +1,9 @@
-package com.example.memepage
+package org.unizd.rma.roncevic
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.unizd.rma.roncevic.R
 
 class GifDetailsActivity : AppCompatActivity() {
     private lateinit var detailsArray: Array<String>

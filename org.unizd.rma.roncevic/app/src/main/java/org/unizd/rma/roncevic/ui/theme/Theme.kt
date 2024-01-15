@@ -1,4 +1,4 @@
-package com.example.memepage.ui.theme
+package org.unizd.rma.roncevic.ui.theme
 
 import android.app.Activity
 import android.os.Build

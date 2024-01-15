@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.memepage"
+    namespace = "org.unizd.rma.roncevic"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.memepage"
+        applicationId = "org.unizd.rma.roncevic"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.memepage
+package org.unizd.rma.roncevic
 
 import org.junit.Test
 

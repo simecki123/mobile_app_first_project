@@ -1,4 +1,4 @@
-package com.example.memepage
+package org.unizd.rma.roncevic
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import com.bumptech.glide.Glide
-import com.example.memepage.ui.theme.MemePageTheme
+import org.unizd.rma.roncevic.R
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader

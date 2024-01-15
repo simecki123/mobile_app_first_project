@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MemePage"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="org.unizd.rma.roncevic.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat">
@@ -25,20 +25,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RestSoldierActivity"
+            android:name="org.unizd.rma.roncevic.RestSoldierActivity"
             android:label="Rest Soldier. You have seen too much gifs"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="org.unizd.rma.roncevic.MainActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
-            android:name=".GifDetailsActivity"
+            android:name="org.unizd.rma.roncevic.GifDetailsActivity"
             android:label="GifDetails"
             android:theme="@style/Theme.AppCompat"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="org.unizd.rma.roncevic.MainActivity"
             android:launchMode="standard"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
